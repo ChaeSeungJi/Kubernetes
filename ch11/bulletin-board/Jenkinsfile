@@ -6,8 +6,8 @@ pipeline {
                 sh '''
                   git version
                   buildctl --version
-                  kubectl version --short
-                  helm version --short
+                  kubectl version
+                  helm version
                 '''
             }
         }
