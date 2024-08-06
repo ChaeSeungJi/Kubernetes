@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     id: 3,
-    title: 'KubeCon North America 2021',
+    title: 'KubeCon North America 2024',
     date: '2021-11-23'
   }
 ];
