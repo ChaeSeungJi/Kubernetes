@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-              echo "Building image tag: ${REGISTRY_SERVER}/${REGISTRY_USER}/bulletin-board"
+              echo "Building image tag: docker.io/twkji/bulletin-board"
               dir ('ch11/bulletin-board') {
                 sh 'chmod +x ci/build.sh && ./ci/build.sh'
               }
