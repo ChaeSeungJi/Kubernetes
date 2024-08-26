@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: permission-fix
+  namespace: default
+spec:
+  containers:
+    - name: permission-fix-container
+      image: busybox
+      command: ["sh", "-c", "chown -R 1000:1000 /mnt && sleep 3600"]
+      volumeMounts:
+        - name: jenkins-data
+          mountPath: /mnt
+  volumes:
+    - name: jenkins-data
+      persistentVolumeClaim:
+        claimName: jenkins-pv-claim

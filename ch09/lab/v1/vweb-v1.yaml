@@ -3,18 +3,18 @@ kind: Deployment
 metadata:
   name: vweb-v1
   labels:
-    kiamol: ch09-lab   
+    kiamol: ch09-lab
     app: vweb
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: vweb
+      app: vweb-blue
       version: v1
   template:
     metadata:
       labels:
-        app: vweb
+        app: vweb-blue
         version: v1
     spec:
       containers:
@@ -24,3 +24,29 @@ spec:
             - name: http
               containerPort: 80
 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vweb-v2
+  labels:
+    kiamol: ch09-lab
+    app: vweb
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: vweb-green
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: vweb-green
+        version: v1
+    spec:
+      containers:
+        - name: web
+          image: kiamol/ch09-vweb:v2
+          ports:
+            - name: http
+              containerPort: 80

@@ -1,15 +1,24 @@
-apiVersion: networking.k8s.io/v1beta1 
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hello-kiamol
+  annotations:
+    kubernetes.io/ingress.class: nginx
   labels:
     kiamol: ch15
 spec:
   rules:
-  - host: hello.kiamol.local
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: hello-kiamol
-          servicePort: 80
+    - host: hello.kiamol.local
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: hello-kiamol
+                port:
+                  number: 80
+            pathType: Prefix
+status:
+  loadBalancer:
+    ingress:
+      - ip: 10.100.100.210 # 2번에서 찾은 값 입력

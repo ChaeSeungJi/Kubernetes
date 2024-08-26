@@ -9,6 +9,6 @@ spec:
     - port: 8090
       targetPort: http
   selector:
-    app: vweb
+    app: vweb-green
     version: v1
   type: LoadBalancer

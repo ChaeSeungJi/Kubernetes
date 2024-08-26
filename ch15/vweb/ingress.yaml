@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1 
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: vweb
@@ -6,20 +6,30 @@ metadata:
     kiamol: ch15
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx # 1번에서 찾은 값 입력
 spec:
   rules:
-  - host: vweb.kiamol.local
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: vweb-v2
-          servicePort: 80
-      - path: /v1
-        backend:
-          serviceName: vweb-v1
-          servicePort: 80
-      - path: /v2
-        backend:
-          serviceName: vweb-v2
-          servicePort: 80
+    - host: vweb.kiamol.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vweb-v2
+                port:
+                  number: 80
+          - path: /v1
+            pathType: Prefix
+            backend:
+              service:
+                name: vweb-v1
+                port:
+                  number: 80
+          - path: /v2
+            pathType: Prefix
+            backend:
+              service:
+                name: vweb-v2
+                port:
+                  number: 80

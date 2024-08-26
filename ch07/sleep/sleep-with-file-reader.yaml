@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
         - name: sleep
-          image: kiamol/ch03-sleep   
+          image: kiamol/ch03-sleep
           volumeMounts:
             - name: data
-              mountPath: /data-rw    
+              mountPath: /data-rw
         - name: file-reader
           image: kiamol/ch03-sleep
           volumeMounts:
