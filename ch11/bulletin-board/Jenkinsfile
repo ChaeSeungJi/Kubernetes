@@ -6,14 +6,14 @@ pipeline {
                 sh '''
                   git version
                   buildctl --version
-                  kubectl version --short
-                  helm version --short
+                  kubectl version
+                  helm version
                 '''
             }
         }
         stage('Build') {
             steps {
-              echo "Building image tag: ${REGISTRY_SERVER}/${REGISTRY_USER}/bulletin-board:${BUILD_NUMBER}-kiamol"
+              echo "Building image tag: docker.io/twkji/bulletin-board"
               dir ('ch11/bulletin-board') {
                 sh 'chmod +x ci/build.sh && ./ci/build.sh'
               }

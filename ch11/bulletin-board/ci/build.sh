@@ -5,4 +5,4 @@ buildctl --addr tcp://buildkitd:1234 \
   --frontend=gateway.v0 \
   --opt source=kiamol/buildkit-buildpacks \
   --local context=src \
-  --output type=image,name=${REGISTRY_SERVER}/${REGISTRY_USER}/bulletin-board:${BUILD_NUMBER}-kiamol,push=true
+  --output type=image,name=docker.io/twkji/bulletin-board,push=true
