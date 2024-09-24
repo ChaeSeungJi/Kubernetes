@@ -2,16 +2,21 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hello-kiamol
-  labels:
-    kiamol: ch15
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx # 1번에서 찾은 값 입력
 spec:
   rules:
     - http:
         paths:
-          - path: /
-            pathType: Prefix
+          - pathType: Prefix
+            path: /
             backend:
               service:
                 name: hello-kiamol
                 port:
                   number: 80
+status:
+  loadBalancer:
+    ingress:
+      - ip: 10.107.144.58 # 2번에서 찾은 값 입력

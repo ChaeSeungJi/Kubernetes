@@ -15,13 +15,13 @@ spec:
         - name: sleep
           image: kiamol/ch03-sleep
           envFrom:
-          - configMapRef:
-              name: sleep-config-env-file
+            - configMapRef:
+                name: sleep-config-env-file
           env:
-          - name: KIAMOL_CHAPTER
-            value: "04"
-          - name: KIAMOL_SECTION
-            valueFrom:
-              configMapKeyRef:              
-                name: sleep-config-literal
-                key: kiamol.section
+            - name: KIAMOL_CHAPTER
+              value: "04"
+            - name: KIAMOL_SECTION
+              valueFrom:
+                configMapKeyRef:
+                  name: sleep-config-literal
+                  key: kiamol.section
