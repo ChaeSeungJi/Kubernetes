@@ -1,4 +1,4 @@
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   name: nonrootpolicy
@@ -7,7 +7,7 @@ metadata:
 webhooks:
   - name: nonrootpolicy.kiamol.net
     rules:
-      - operations: [ "CREATE", "UPDATE" ]
+      - operations: ["CREATE", "UPDATE"]
         apiGroups: [""]
         apiVersions: ["v1"]
         resources: ["pods"]
@@ -16,4 +16,6 @@ webhooks:
         name: admission-webhook
         namespace: default
         path: "/mutate"
-      caBundle: {{ .Values.caBundle }}
+      caBundle: "{{ .Values.caBundle }}"
+    sideEffects: None
+    admissionReviewVersions: ["v1"]

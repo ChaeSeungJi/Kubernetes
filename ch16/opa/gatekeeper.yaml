@@ -7,7 +7,7 @@ metadata:
     gatekeeper.sh/system: "yes"
   name: gatekeeper-system
 ---
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
@@ -29,14 +29,16 @@ spec:
       description: Config is the Schema for the configs API
       properties:
         apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation
+          description:
+            "APIVersion defines the versioned schema of this representation
             of an object. Servers should convert recognized schemas to the latest
-            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
           type: string
         kind:
-          description: 'Kind is a string value representing the REST resource this
+          description:
+            "Kind is a string value representing the REST resource this
             object represents. Servers may infer this from the endpoint the client
-            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
           type: string
         metadata:
           type: object
@@ -47,7 +49,8 @@ spec:
               description: Configuration for syncing k8s objects
               properties:
                 syncOnly:
-                  description: If non-empty, only entries on this list will be replicated
+                  description:
+                    If non-empty, only entries on this list will be replicated
                     into OPA
                   items:
                     properties:
@@ -64,12 +67,14 @@ spec:
               description: Configuration for validation
               properties:
                 traces:
-                  description: List of requests to trace. Both "user" and "kinds"
+                  description:
+                    List of requests to trace. Both "user" and "kinds"
                     must be specified
                   items:
                     properties:
                       dump:
-                        description: Also dump the state of OPA with the trace. Set
+                        description:
+                          Also dump the state of OPA with the trace. Set
                           to `All` to dump everything.
                         type: string
                       kind:
@@ -95,9 +100,9 @@ spec:
       type: object
   version: v1alpha1
   versions:
-  - name: v1alpha1
-    served: true
-    storage: true
+    - name: v1alpha1
+      served: true
+      storage: true
 status:
   acceptedNames:
     kind: ""
@@ -124,18 +129,21 @@ spec:
   scope: Namespaced
   validation:
     openAPIV3Schema:
-      description: ConstraintPodStatus is the Schema for the constraintpodstatuses
+      description:
+        ConstraintPodStatus is the Schema for the constraintpodstatuses
         API
       properties:
         apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation
+          description:
+            "APIVersion defines the versioned schema of this representation
             of an object. Servers should convert recognized schemas to the latest
-            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
           type: string
         kind:
-          description: 'Kind is a string value representing the REST resource this
+          description:
+            "Kind is a string value representing the REST resource this
             object represents. Servers may infer this from the endpoint the client
-            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
           type: string
         metadata:
           type: object
@@ -143,7 +151,8 @@ spec:
           description: ConstraintPodStatusStatus defines the observed state of ConstraintPodStatus
           properties:
             constraintUID:
-              description: Storing the constraint UID allows us to detect drift, such
+              description:
+                Storing the constraint UID allows us to detect drift, such
                 as when a constraint has been recreated after its CRD was deleted
                 out from under it, interrupting the watch
               type: string
@@ -151,7 +160,8 @@ spec:
               type: boolean
             errors:
               items:
-                description: Error represents a single error caught while adding a
+                description:
+                  Error represents a single error caught while adding a
                   constraint to OPA
                 properties:
                   code:
@@ -161,8 +171,8 @@ spec:
                   message:
                     type: string
                 required:
-                - code
-                - message
+                  - code
+                  - message
                 type: object
               type: array
             id:
@@ -178,9 +188,9 @@ spec:
       type: object
   version: v1beta1
   versions:
-  - name: v1beta1
-    served: true
-    storage: true
+    - name: v1beta1
+      served: true
+      storage: true
 status:
   acceptedNames:
     kind: ""
@@ -207,28 +217,33 @@ spec:
   scope: Namespaced
   validation:
     openAPIV3Schema:
-      description: ConstraintTemplatePodStatus is the Schema for the constrainttemplatepodstatuses
+      description:
+        ConstraintTemplatePodStatus is the Schema for the constrainttemplatepodstatuses
         API
       properties:
         apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation
+          description:
+            "APIVersion defines the versioned schema of this representation
             of an object. Servers should convert recognized schemas to the latest
-            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
           type: string
         kind:
-          description: 'Kind is a string value representing the REST resource this
+          description:
+            "Kind is a string value representing the REST resource this
             object represents. Servers may infer this from the endpoint the client
-            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
           type: string
         metadata:
           type: object
         status:
-          description: ConstraintTemplatePodStatusStatus defines the observed state
+          description:
+            ConstraintTemplatePodStatusStatus defines the observed state
             of ConstraintTemplatePodStatus
           properties:
             errors:
               items:
-                description: CreateCRDError represents a single error caught during
+                description:
+                  CreateCRDError represents a single error caught during
                   parsing, compiling, etc.
                 properties:
                   code:
@@ -238,12 +253,13 @@ spec:
                   message:
                     type: string
                 required:
-                - code
-                - message
+                  - code
+                  - message
                 type: object
               type: array
             id:
-              description: 'Important: Run "make" to regenerate code after modifying
+              description:
+                'Important: Run "make" to regenerate code after modifying
                 this file'
               type: string
             observedGeneration:
@@ -254,7 +270,8 @@ spec:
                 type: string
               type: array
             templateUID:
-              description: UID is a type that holds unique ID values, including UUIDs.  Because
+              description:
+                UID is a type that holds unique ID values, including UUIDs.  Because
                 we don't ONLY use UUIDs, this is an alias to string.  Being a type
                 captures intent and helps make sure that UIDs and names do not get
                 conflated.
@@ -263,9 +280,9 @@ spec:
       type: object
   version: v1beta1
   versions:
-  - name: v1beta1
-    served: true
-    storage: true
+    - name: v1beta1
+      served: true
+      storage: true
 status:
   acceptedNames:
     kind: ""
@@ -293,14 +310,16 @@ spec:
     openAPIV3Schema:
       properties:
         apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation
+          description:
+            "APIVersion defines the versioned schema of this representation
             of an object. Servers should convert recognized schemas to the latest
-            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
           type: string
         kind:
-          description: 'Kind is a string value representing the REST resource this
+          description:
+            "Kind is a string value representing the REST resource this
             object represents. Servers may infer this from the endpoint the client
-            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
           type: string
         metadata:
           type: object
@@ -352,8 +371,8 @@ spec:
                         message:
                           type: string
                       required:
-                      - code
-                      - message
+                        - code
+                        - message
                       type: object
                     type: array
                   id:
@@ -369,12 +388,12 @@ spec:
           type: object
   version: v1beta1
   versions:
-  - name: v1beta1
-    served: true
-    storage: true
-  - name: v1alpha1
-    served: true
-    storage: false
+    - name: v1beta1
+      served: true
+      storage: true
+    - name: v1alpha1
+      served: true
+      storage: false
 status:
   acceptedNames:
     kind: ""
@@ -399,18 +418,18 @@ metadata:
   name: gatekeeper-manager-role
   namespace: gatekeeper-system
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -420,119 +439,119 @@ metadata:
     gatekeeper.sh/system: "yes"
   name: gatekeeper-manager-role
 rules:
-- apiGroups:
-  - '*'
-  resources:
-  - '*'
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - apiextensions.k8s.io
-  resources:
-  - customresourcedefinitions
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - config.gatekeeper.sh
-  resources:
-  - configs
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - config.gatekeeper.sh
-  resources:
-  - configs/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
-  - constraints.gatekeeper.sh
-  resources:
-  - '*'
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - policy
-  resources:
-  - podsecuritypolicies
-  verbs:
-  - use
-- apiGroups:
-  - status.gatekeeper.sh
-  resources:
-  - '*'
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - templates.gatekeeper.sh
-  resources:
-  - constrainttemplates
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - templates.gatekeeper.sh
-  resources:
-  - constrainttemplates/finalizers
-  verbs:
-  - delete
-  - get
-  - patch
-  - update
-- apiGroups:
-  - templates.gatekeeper.sh
-  resources:
-  - constrainttemplates/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
-  - admissionregistration.k8s.io
-  resourceNames:
-  - gatekeeper-validating-webhook-configuration
-  resources:
-  - validatingwebhookconfigurations
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
+  - apiGroups:
+      - "*"
+    resources:
+      - "*"
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - config.gatekeeper.sh
+    resources:
+      - configs
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - config.gatekeeper.sh
+    resources:
+      - configs/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - constraints.gatekeeper.sh
+    resources:
+      - "*"
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - policy
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
+  - apiGroups:
+      - status.gatekeeper.sh
+    resources:
+      - "*"
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - templates.gatekeeper.sh
+    resources:
+      - constrainttemplates
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - templates.gatekeeper.sh
+    resources:
+      - constrainttemplates/finalizers
+    verbs:
+      - delete
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - templates.gatekeeper.sh
+    resources:
+      - constrainttemplates/status
+    verbs:
+      - get
+      - patch
+      - update
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resourceNames:
+      - gatekeeper-validating-webhook-configuration
+    resources:
+      - validatingwebhookconfigurations
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -546,9 +565,9 @@ roleRef:
   kind: Role
   name: gatekeeper-manager-role
 subjects:
-- kind: ServiceAccount
-  name: gatekeeper-admin
-  namespace: gatekeeper-system
+  - kind: ServiceAccount
+    name: gatekeeper-admin
+    namespace: gatekeeper-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -561,9 +580,9 @@ roleRef:
   kind: ClusterRole
   name: gatekeeper-manager-role
 subjects:
-- kind: ServiceAccount
-  name: gatekeeper-admin
-  namespace: gatekeeper-system
+  - kind: ServiceAccount
+    name: gatekeeper-admin
+    namespace: gatekeeper-system
 ---
 apiVersion: v1
 kind: Secret
@@ -582,8 +601,8 @@ metadata:
   namespace: gatekeeper-system
 spec:
   ports:
-  - port: 443
-    targetPort: 8443
+    - port: 443
+      targetPort: 8443
   selector:
     control-plane: controller-manager
     gatekeeper.sh/operation: webhook
@@ -615,55 +634,55 @@ spec:
         gatekeeper.sh/system: "yes"
     spec:
       containers:
-      - args:
-        - --operation=audit
-        - --operation=status
-        - --logtostderr
-        command:
-        - /manager
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        image: openpolicyagent/gatekeeper:v3.1.0-beta.10
-        imagePullPolicy: Always
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 9090
-        name: auditcontainer
-        ports:
-        - containerPort: 8888
-          name: metrics
-          protocol: TCP
-        - containerPort: 9090
-          name: healthz
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 9090
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 512Mi
-          requests:
-            cpu: 100m
-            memory: 256Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - all
-          runAsGroup: 999
-          runAsNonRoot: true
-          runAsUser: 1000
+        - args:
+            - --operation=audit
+            - --operation=status
+            - --logtostderr
+          command:
+            - /manager
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          image: openpolicyagent/gatekeeper:v3.1.0-beta.10
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9090
+          name: auditcontainer
+          ports:
+            - containerPort: 8888
+              name: metrics
+              protocol: TCP
+            - containerPort: 9090
+              name: healthz
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 9090
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+            runAsGroup: 999
+            runAsNonRoot: true
+            runAsUser: 1000
       nodeSelector:
         kubernetes.io/os: linux
       serviceAccountName: gatekeeper-admin
@@ -695,72 +714,72 @@ spec:
         gatekeeper.sh/system: "yes"
     spec:
       containers:
-      - args:
-        - --port=8443
-        - --logtostderr
-        - --exempt-namespace=gatekeeper-system
-        - --operation=webhook
-        command:
-        - /manager
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        image: openpolicyagent/gatekeeper:v3.1.0-beta.10
-        imagePullPolicy: Always
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 9090
-        name: manager
-        ports:
-        - containerPort: 8443
-          name: webhook-server
-          protocol: TCP
-        - containerPort: 8888
-          name: metrics
-          protocol: TCP
-        - containerPort: 9090
-          name: healthz
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 9090
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 512Mi
-          requests:
-            cpu: 100m
-            memory: 256Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - all
-          runAsGroup: 999
-          runAsNonRoot: true
-          runAsUser: 1000
-        volumeMounts:
-        - mountPath: /certs
-          name: cert
-          readOnly: true
+        - args:
+            - --port=8443
+            - --logtostderr
+            - --exempt-namespace=gatekeeper-system
+            - --operation=webhook
+          command:
+            - /manager
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          image: openpolicyagent/gatekeeper:v3.1.0-beta.10
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9090
+          name: manager
+          ports:
+            - containerPort: 8443
+              name: webhook-server
+              protocol: TCP
+            - containerPort: 8888
+              name: metrics
+              protocol: TCP
+            - containerPort: 9090
+              name: healthz
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 9090
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+            runAsGroup: 999
+            runAsNonRoot: true
+            runAsUser: 1000
+          volumeMounts:
+            - mountPath: /certs
+              name: cert
+              readOnly: true
       nodeSelector:
         kubernetes.io/os: linux
       serviceAccountName: gatekeeper-admin
       terminationGracePeriodSeconds: 60
       volumes:
-      - name: cert
-        secret:
-          defaultMode: 420
-          secretName: gatekeeper-webhook-server-cert
+        - name: cert
+          secret:
+            defaultMode: 420
+            secretName: gatekeeper-webhook-server-cert
 ---
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
@@ -770,49 +789,49 @@ metadata:
     gatekeeper.sh/system: "yes"
   name: gatekeeper-validating-webhook-configuration
 webhooks:
-- clientConfig:
-    caBundle: Cg==
-    service:
-      name: gatekeeper-webhook-service
-      namespace: gatekeeper-system
-      path: /v1/admit
-  failurePolicy: Ignore
-  name: validation.gatekeeper.sh
-  namespaceSelector:
-    matchExpressions:
-    - key: control-plane
-      operator: DoesNotExist
-    - key: admission.gatekeeper.sh/ignore
-      operator: DoesNotExist
-  rules:
-  - apiGroups:
-    - '*'
-    apiVersions:
-    - '*'
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - '*'
-  sideEffects: None
-  timeoutSeconds: 5
-- clientConfig:
-    caBundle: Cg==
-    service:
-      name: gatekeeper-webhook-service
-      namespace: gatekeeper-system
-      path: /v1/admitlabel
-  failurePolicy: Fail
-  name: check-ignore-label.gatekeeper.sh
-  rules:
-  - apiGroups:
-    - ""
-    apiVersions:
-    - '*'
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - namespaces
-  sideEffects: None
-  timeoutSeconds: 5
+  - clientConfig:
+      caBundle: Cg==
+      service:
+        name: gatekeeper-webhook-service
+        namespace: gatekeeper-system
+        path: /v1/admit
+    failurePolicy: Ignore
+    name: validation.gatekeeper.sh
+    namespaceSelector:
+      matchExpressions:
+        - key: control-plane
+          operator: DoesNotExist
+        - key: admission.gatekeeper.sh/ignore
+          operator: DoesNotExist
+    rules:
+      - apiGroups:
+          - "*"
+        apiVersions:
+          - "*"
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - "*"
+    sideEffects: None
+    timeoutSeconds: 5
+  - clientConfig:
+      caBundle: Cg==
+      service:
+        name: gatekeeper-webhook-service
+        namespace: gatekeeper-system
+        path: /v1/admitlabel
+    failurePolicy: Fail
+    name: check-ignore-label.gatekeeper.sh
+    rules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - "*"
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - namespaces
+    sideEffects: None
+    timeoutSeconds: 5

@@ -33,4 +33,4 @@ spec:
         - name: cache-volume
           hostPath:
             path: /volumes/nginx-cache
-            type: DirectoryOrCreate
+            type: DirectoryxOrCreate

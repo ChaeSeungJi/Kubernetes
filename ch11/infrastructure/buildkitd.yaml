@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: buildkitd
   labels:
-    kiamol: ch11
+    seungji: test
 spec:
   ports:
-  - port: 1234
-    targetPort: buildkitd
+    - port: 1234
+      targetPort: buildkitd
   selector:
     app: buildkitd
 ---
@@ -16,7 +16,7 @@ kind: Deployment
 metadata:
   name: buildkitd
   labels:
-    kiamol: ch11
+    seungji: test
 spec:
   replicas: 1
   selector:
@@ -28,15 +28,15 @@ spec:
         app: buildkitd
     spec:
       containers:
-      - name: buildkitd
-        image: moby/buildkit:v0.7.1
-        args:
-        - --addr
-        - unix:///run/buildkit/buildkitd.sock
-        - --addr
-        - tcp://0.0.0.0:1234
-        securityContext:
-          privileged: true
-        ports:
-          - name: buildkitd
-            containerPort: 1234
+        - name: buildkitd
+          image: moby/buildkit:v0.15.1
+          args:
+            - --addr
+            - unix:///run/buildkit/buildkitd.sock
+            - --addr
+            - tcp://0.0.0.0:1234
+          securityContext:
+            privileged: true
+          ports:
+            - name: buildkitd
+              containerPort: 1234

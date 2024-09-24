@@ -71,7 +71,12 @@ spec:
             - name: config
               mountPath: "/etc/nginx/"
               readOnly: true
+            - name: data
+              mountPath: "/data/nginx/cache"
       volumes:
         - name: config
           configMap:
             name: todo-proxy-lab-configmap
+        - name: data
+          persistentVolumeClaim:
+            claimName: my-cache-pvc

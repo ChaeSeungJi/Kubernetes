@@ -7,7 +7,7 @@ RUN apk --no-cache --no-progress add --virtual \
     build-deps \
     build-base \
     git \
-    linux-pam-dev 
+    linux-pam-dev
 
 WORKDIR /go/src/github.com/gogs
 RUN git clone https://github.com/gogs/gogs.git && \
@@ -15,23 +15,23 @@ RUN git clone https://github.com/gogs/gogs.git && \
     git checkout $GOGS_VERSION
 
 WORKDIR /go/src/github.com/gogs/gogs
-RUN go build -tags "sqlite" -o /out/gogs 
+RUN go build -tags "sqlite" -o /out/gogs
 
 FROM alpine:$ALPINE_VERSION AS download-base
 WORKDIR /downloads
-RUN echo "$(apk --print-arch)" > /arch.txt 
+RUN echo "$(apk --print-arch)" > /arch.txt
 RUN ARCH2= && alpineArch="$(apk --print-arch)" \
     && case "${alpineArch##*-}" in \
     x86_64) ARCH2='amd64' ;; \
     aarch64) ARCH2='arm64' ;; \
     *) echo "unsupported architecture"; exit 1 ;; \
     esac && \
-    echo $ARCH2 > /arch2.txt 
+    echo $ARCH2 > /arch2.txt
 
 # Gogs - adapted from project Dockerfile at github.com/gogs/gogs
 FROM download-base AS gogs
 
-# Install system utils & Gogs runtime dependencies
+# Install system utils & Gogs runtime dependencies
 RUN wget -O /usr/sbin/gosu "https://github.com/tianon/gosu/releases/download/1.14/gosu-$(cat /arch2.txt)" && \
     chmod +x /usr/sbin/gosu \
     && echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories \
@@ -61,7 +61,7 @@ COPY --from=builder /out/gogs .
 RUN ./docker/finalize.sh
 
 VOLUME ["/data"]
-EXPOSE 3000
+EXPOSE 3001
 ENTRYPOINT ["/app/gogs/docker/start.sh"]
 CMD ["/bin/s6-svscan", "/app/gogs/docker/s6/"]
 
@@ -71,14 +71,16 @@ FROM gogs
 RUN apk add --no-cache jq
 ENV GOGS_CUSTOM=""
 
-COPY app.ini ./custom/conf/app.ini
-COPY gogs-install.txt .
-COPY init.sh .
+COPY app.ini /data/gogs/conf/app.ini
+COPY gogs-install.txt /app/gogs/gogs-install.txt
+COPY init.sh /app/gogs/init.sh
+
+# Ensure init.sh script has the correct permissions
+RUN chmod +x /app/gogs/init.sh
 
 # this uses the original start script to prep the data folders:
-RUN chmod o+w ./custom/conf/app.ini && \
-    chmod +x init.sh && ./init.sh
+RUN chmod o+w /data/gogs/conf/app.ini && /app/gogs/init.sh || true
 
 # replace with custom start script:
-COPY start.sh ./docker/start.sh
-RUN chmod +x ./docker/start.sh
+COPY start.sh /app/gogs/docker/start.sh
+RUN chmod +x /app/gogs/docker/start.sh

@@ -1,11 +1,11 @@
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: todo-db-backup
   labels:
     kiamol: ch08
 spec:
-  schedule: "*/2 * * * *"        # see https://crontab.guru
+  schedule: "*/2 * * * *" # see https://crontab.guru
   concurrencyPolicy: Forbid
   suspend: true
   jobTemplate:
@@ -14,21 +14,26 @@ spec:
         spec:
           restartPolicy: Never
           containers:
-          - name: backup
-            image: postgres:11.6-alpine
-            command: ['sh', '-c', 'pg_dump -h $POSTGRES_SECONDARY_FQDN -U postgres -F tar -f "/backup/$(date +%y%m%d-%H%M).tar" todo']
-            envFrom:
-            - configMapRef:
-                name: todo-db-env
-            env:
-            - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: POSTGRES_PASSWORD
-                  name: todo-db-secret
-            volumeMounts:
-              - name: backup
-                mountPath: "/backup"
+            - name: backup
+              image: postgres:11.6-alpine
+              command:
+                [
+                  "sh",
+                  "-c",
+                  'pg_dump -h $POSTGRES_SECONDARY_FQDN -U postgres -F tar -f "/backup/$(date +%y%m%d-%H%M).tar" todo',
+                ]
+              envFrom:
+                - configMapRef:
+                    name: todo-db-env
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key: POSTGRES_PASSWORD
+                      name: todo-db-secret
+              volumeMounts:
+                - name: backup
+                  mountPath: "/backup"
           volumes:
             - name: backup
               persistentVolumeClaim:

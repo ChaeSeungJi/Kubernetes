@@ -1,4 +1,4 @@
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: servicetokenpolicy
@@ -7,7 +7,7 @@ metadata:
 webhooks:
   - name: servicetokenpolicy.kiamol.net
     rules:
-      - operations: [ "CREATE", "UPDATE" ]
+      - operations: ["CREATE", "UPDATE"]
         apiGroups: [""]
         apiVersions: ["v1"]
         resources: ["pods"]
@@ -16,4 +16,6 @@ webhooks:
         name: admission-webhook
         namespace: default
         path: "/validate"
-      caBundle: {{ .Values.caBundle }}
+      caBundle: "{{ .Values.caBundle }}"
+    sideEffects: None
+    admissionReviewVersions: ["v1"]

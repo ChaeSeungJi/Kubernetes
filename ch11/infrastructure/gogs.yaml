@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: gogs
   labels:
-    kiamol: ch11
+    seungji: test
 spec:
   ports:
     - port: 3000
@@ -17,7 +17,7 @@ kind: Deployment
 metadata:
   name: gogs
   labels:
-    kiamol: ch11
+    seungji: test
 spec:
   selector:
     matchLabels:
